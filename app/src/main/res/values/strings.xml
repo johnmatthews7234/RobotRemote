@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">RobotRemote</string>
     <string name="begin_button">Begin</string>
+    <string name="send_button">Send</string>
+    <string name="stop_button">Stop</string>
+    <string name="clear_button">Clear</string>
 </resources>
