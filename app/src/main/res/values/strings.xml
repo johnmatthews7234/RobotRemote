@@ -5,4 +5,7 @@
     <string name="stop_button">Stop</string>
     <string name="clear_button">Clear</string>
     <string name="command_hint">Enter command here</string>
+    <string name="connection_closed">Serial Connection Closed!</string>
+    <string name="connection_opened">Serial Connection Opened!</string>
+    <string name="data_sent">Data Sent: </string>
 </resources>
