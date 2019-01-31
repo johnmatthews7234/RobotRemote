@@ -26,6 +26,9 @@ int Rspeed;
 #define in4 7
 
 
+String commandstring = "";
+bool stringcomplete = false;
+
 void resetCounters() {
   Lcounter = 0;
   Rcounter = 0;
@@ -62,6 +65,7 @@ void setup() {
   pinMode(in4, OUTPUT);
 
   Serial.begin(9600);
+  commandstring.reserve(80);
 }
 
 void moveStep(long step) {
@@ -182,24 +186,42 @@ void FullRadar() {
   }
 }
 
+void serialEvent() {
+    while (Serial.available()) {
+        char inChar = (char)Serial.read();
+        commandstring += inChar;
+        if (inChar == '\n' {
+            stringComplete = true;
+        }
+    }
+}
+
 void loop() {
   // put your main code here, to run repeatedly:
-  PointRadar(90);
-  Serial.println("Forward: ");
-  forward(10, 96);
-  setMotorSpeed(0);
-  Serial.println("Stop Forward: ");
-  delay(5000);
-  /*
-   * Serial.println("Backward: ");
-  backward(10, 96);
-  setMotorSpeed(0);
-  Serial.println("Stop Backward: ");
-  delay(5000);
-  PointRadar(90);
-  Serial.println("Radar: ");
-  FullRadar();
-  Serial.println("Stop Backward: ");
-  delay(5000);
-  */
+  if (stringComplete) {
+    command = commandstring.charAt(0)
+    parameter = commandstring.substring(1)
+    switch (command) {
+        case 'f':
+            forward(parameter,96);
+            break;
+        case 'b':
+            backward(parameter, 96);
+            break;
+        case 'c':
+            clockwise(parameter, 96 );
+            break;
+        case 'a':
+            anticlockwise(parameter,96);
+            break;
+        case 'r':
+            FullRadar();
+            break;
+        default:
+            Serial.println("Unknown command")
+            break;
+    }
+    commandstring = "";
+    stringComplete = false;
+  }
 }
